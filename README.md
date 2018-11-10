@@ -9,7 +9,10 @@ sudo FLASK_APP=flasktest.py flask run --host=0.0.0.0
 
 ## FLASK
 pip install flask
-
+git clone https://github.com/CoryDolphin/flask-cors
+python setup.py test
+python setup.py install
+https://github.com/twaldear/flask-csp not seem to be needed but just inj case its here 
 ## Python lib
 We need to use python 2.7
 * flask seems to use python3 by default but doc says it works with python2

@@ -1,9 +1,6 @@
 from flask import Flask
 from flask import request
-
-
-
-
+from flask_cors import cross_origin
 
 
 import time
@@ -48,9 +45,12 @@ def shutdownLeds(strip):
             strip.show()
 
 def singleColor(strip, color):
+        speed=30
         for i in range(strip.numPixels()):
-            strip.setPixelColor(i, color)
-            strip.show()
+                strip.setPixelColor(i, color)
+                strip.show()
+                time.sleep(speed/1000.0)
+
         
 
 # MAIN CODE
@@ -66,32 +66,39 @@ app = Flask("MAXIME")
 
 
 @app.route('/')
+@cross_origin()
 def routeHello():
 
         rainbow(strip, 20, 1)
 	return "Hello World!"
 
 @app.route('/shut')
+@cross_origin()
+
 def routeShutdown():
         shutdownLeds(strip)
 	return "Success shutting down"
 
 @app.route('/single/red')
+@cross_origin()
 def routeRed():
         singleColor(strip, Color(0,100,0))
 	return "Success"
 
 @app.route('/single/green')
+@cross_origin()
 def routeG():
         singleColor(strip, Color(10,10,0))
 	return "Success"
 
 @app.route('/single/blue')
+@cross_origin()
 def routeB():
         singleColor(strip, Color(0,0,100))
 	return "Success"
 
 @app.route('/colorControl', methods=['POST'])
+@cross_origin()
 def routeColorControl():
         print("COLOR CONTROL")
         print (request.is_json)
