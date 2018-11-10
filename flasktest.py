@@ -1,5 +1,5 @@
 from flask import Flask
-
+from flask import request
 
 
 
@@ -63,6 +63,8 @@ strip.begin()
 
 app = Flask("MAXIME")
 
+
+
 @app.route('/')
 def routeHello():
 
@@ -88,5 +90,19 @@ def routeG():
 def routeB():
         singleColor(strip, Color(0,0,100))
 	return "Success"
+
+@app.route('/colorControl', methods=['POST'])
+def routeColorControl():
+        print("COLOR CONTROL")
+        print (request.is_json)
+        j = request.get_json()
+        print(j['green'])
+        print(j['red'])
+        print(j['blue'])
+        print("ho")
+        print(j)
+        singleColor(strip, Color(int(j['green']), int(j['red']), int(j['blue'])))
+        return "Success"
+
 
 
