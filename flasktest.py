@@ -100,13 +100,8 @@ def routeB():
 @app.route('/colorControl', methods=['POST'])
 @cross_origin()
 def routeColorControl():
-        print("COLOR CONTROL")
         print (request.is_json)
         j = request.get_json()
-        print(j['green'])
-        print(j['red'])
-        print(j['blue'])
-        print("ho")
         print(j)
         singleColor(strip, Color(int(j['green']), int(j['red']), int(j['blue'])))
         return "Success"
